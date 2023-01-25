@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 protocol BannerComponentDelegate: AnyObject {
-  func buttonClicked()
+  func bannerButtonClicked()
 }
 
 protocol BannerDataProvider {
@@ -22,16 +22,14 @@ final class BannerComponent {
 
   private let view: BannerView
   private let dataProvider: BannerDataProvider
-  private unowned var delegate: BannerComponentDelegate
+  weak var delegate: BannerComponentDelegate?
 
   init(
     view: BannerView,
-    dataProvider: BannerDataProvider,
-    delegate: BannerComponentDelegate
+    dataProvider: BannerDataProvider
   ) {
 
     self.dataProvider = dataProvider
-    self.delegate = delegate
     self.view = view
 
     self.view.onButtonClicked = { [unowned self] in
@@ -46,7 +44,7 @@ final class BannerComponent {
 
 private extension BannerComponent {
   func onActionButtonClicked() {
-    delegate.buttonClicked()
+    delegate?.bannerButtonClicked()
   }
 
   func generateViewModel() -> BannerViewViewModel {

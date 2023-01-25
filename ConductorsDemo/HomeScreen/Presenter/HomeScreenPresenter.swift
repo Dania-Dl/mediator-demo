@@ -17,6 +17,13 @@ protocol HomeView: AnyObject {
   func hideLoading()
 }
 
+protocol HomeScreenDelegate: AnyObject {
+  func onViewDidLoad()
+  func onViewWillAppear()
+  func onViewDidAppear()
+  func onViewWillDisappear()
+}
+
 protocol HomeScreenDataProvider {
   var isRunning: Bool { get set }
   var counter: Int { get set }
@@ -27,33 +34,52 @@ final class HomeScreenPresenter {
   private var dataProvider: HomeScreenDataProvider
   private unowned var view: HomeScreenView
   weak var router: HomeScreenRouting?
-  private let conductor: HomeScreenConductor
-  private var homeChannel: HomeScreenChannel {
-    return conductor.homeScreenChannel
-  }
+  private let componentsFactory: HomeScreenComponentsFactory
+  private var timerComponent: TimerComponent?
+  private var navigationBarComponent: NavigationBarComponent?
+  private var bannerComponent: BannerComponent?
 
-  init(view: HomeScreenView, diContainer: HomeScreenDIContainer, conductor: HomeScreenConductor) {
+  private var conductor: HomeScreenConductor?
+  private weak var delegate: HomeScreenDelegate?
+
+  init(view: HomeScreenView, diContainer: HomeScreenDIContainer, componentsFactory: HomeScreenComponentsFactory) {
 
     self.view = view
-    self.conductor = conductor
+    self.componentsFactory = componentsFactory
     self.dataProvider = diContainer.homeScreenDataProvider
   }
 
   func onViewDidLoad(with bannerView: BannerView) {
-    conductor.start(presenter: self, bannerView: bannerView)
-    homeChannel.notifyOnViewDidLoad()
+    createComponents(bannerView: bannerView)
+    delegate?.onViewDidLoad()
+  }
+
+  
+  func createComponents(bannerView: BannerView) {
+    timerComponent = componentsFactory.timerComponent()
+    navigationBarComponent = componentsFactory.navigationBarComponent()
+    bannerComponent = componentsFactory.bannerComponent(view: bannerView)
+    if let navigationBarView = navigationBarComponent?.view {
+      view.setup(with: navigationBarView)
+    }
+    conductor = HomeScreenConductor(
+      presenter: self,
+      timerComponent: timerComponent,
+      navigationBarComponent: navigationBarComponent,
+      bannerComponent: bannerComponent
+    )
   }
 
   func onViewWillAppear() {
-    homeChannel.notifyOnViewWillAppear()
+    delegate?.onViewWillAppear()
   }
 
   func notifyOnViewDidAppear() {
-    homeChannel.notifyOnViewDidAppear()
+    delegate?.onViewDidAppear()
   }
 
   func notifyOnViewWillDisappear() {
-    homeChannel.notifyOnViewWillDisappear()
+    delegate?.onViewWillDisappear()
   }
 
   func setup(with navigationBar: NavigationBarView) {
@@ -62,7 +88,7 @@ final class HomeScreenPresenter {
 
 }
 
-extension HomeScreenPresenter: TimerComponentObserver {
+extension HomeScreenPresenter {
   func timerDidStop() {
     dataProvider.isRunning = false
   }
@@ -70,16 +96,12 @@ extension HomeScreenPresenter: TimerComponentObserver {
   func timerDidTick() {
     dataProvider.counter += 1
   } 
-}
 
-extension HomeScreenPresenter: BannerComponentObserver {
   func bannerButtonClicked() {
     dataProvider.isRunning = !dataProvider.isRunning
     dataProvider.counter = 0
   }
-}
 
-extension HomeScreenPresenter: NavigationBarComponentObserver {
   func navigationButtonClicked() {
     dataProvider.isRunning = !dataProvider.isRunning
     dataProvider.counter = 0

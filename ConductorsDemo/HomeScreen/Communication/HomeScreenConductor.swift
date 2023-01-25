@@ -10,43 +10,63 @@ import Foundation
 
 class HomeScreenConductor {
 
-  let homeScreenChannel = HomeScreenChannel()
-
-  private let navigationBarChannel = NavigationBarComponentChannel()
-  private let bannerChannel = BannerComponentChannel()
-  private let timerChannel = TimerComponentChannel()
-
+  private let presenter: HomeScreenPresenter
   private var timerComponent: TimerComponent?
   private var navigationBarComponent: NavigationBarComponent?
   private var bannerComponent: BannerComponent?
 
-  private let componentsFactory: HomeScreenComponentsFactory
-
-
-  init(componentsFactory: HomeScreenComponentsFactory) {
-    self.componentsFactory = componentsFactory
+  init(
+    presenter: HomeScreenPresenter,
+    timerComponent: TimerComponent? = nil,
+    navigationBarComponent: NavigationBarComponent? = nil,
+    bannerComponent: BannerComponent? = nil
+  ) {
+    self.presenter = presenter
+    self.timerComponent = timerComponent
+    self.navigationBarComponent = navigationBarComponent
+    self.bannerComponent = bannerComponent
+    self.timerComponent?.delegate = self
+    self.navigationBarComponent?.delegate = self
+    self.bannerComponent?.delegate = self
   }
+}
 
-  func start(presenter: HomeScreenPresenter, bannerView: BannerView) {
-
-    navigationBarChannel.register(observer: presenter)
-    bannerChannel.register(observer: presenter)
-    timerChannel.register(observer: presenter)
-
-    timerComponent = componentsFactory.timerComponent(delegate: timerChannel)
-    bannerChannel.register(observer: timerComponent!)
-    navigationBarChannel.register(observer: timerComponent!)
-
-    navigationBarComponent = componentsFactory.navigationBarComponent(delegate: navigationBarChannel)
-    timerChannel.register(observer: navigationBarComponent!)
-    bannerChannel.register(observer: navigationBarComponent!)
-    homeScreenChannel.register(observer: navigationBarComponent!)
-
-    bannerComponent = componentsFactory.bannerComponent(view: bannerView, delegate: bannerChannel)
-    timerChannel.register(observer: bannerComponent!)
-    navigationBarChannel.register(observer: bannerComponent!)
-    homeScreenChannel.register(observer: bannerComponent!)
-
-    presenter.setup(with: navigationBarComponent!.view)
+extension HomeScreenConductor: TimerComponentDelegate {
+  func didTick() {
+    presenter.timerDidTick()
+    navigationBarComponent?.update()
+    bannerComponent?.updateView()
   }
+  
+  func didStop() {
+    presenter.timerDidStop()
+    navigationBarComponent?.update()
+    bannerComponent?.updateView()
+  }
+}
+
+extension HomeScreenConductor: NavigationBarComponentDelegate {
+  func buttonClicked() {
+    presenter.navigationButtonClicked()
+    timerComponent?.resetTimerState()
+    bannerComponent?.updateView()
+  }
+}
+
+extension HomeScreenConductor: BannerComponentDelegate {
+  func bannerButtonClicked() {
+    presenter.bannerButtonClicked()
+    timerComponent?.resetTimerState()
+    navigationBarComponent?.update()
+  }
+}
+
+extension HomeScreenConductor: HomeScreenDelegate {
+  func onViewDidLoad() {}
+  func onViewWillAppear() {
+    navigationBarComponent?.update()
+    bannerComponent?.updateView()
+  }
+  func onViewDidAppear() {}
+  func onViewWillDisappear() {}
 }

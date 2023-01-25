@@ -21,16 +21,12 @@ final class NavigationBarComponent {
 
   let view = NavigationBarView.initFromNib()!
   private let dataProvider: NavigationBarComponentDataProvider
-  private unowned let delegate: NavigationBarComponentDelegate
+  weak var delegate: NavigationBarComponentDelegate?
 
-  init(
-    delegate: NavigationBarComponentDelegate,
-    dataProvider: NavigationBarComponentDataProvider
-  ) {
-    self.delegate = delegate
+  init(dataProvider: NavigationBarComponentDataProvider) {
     self.dataProvider = dataProvider
     view.onButtonClicked = { [unowned self] in
-      self.delegate.buttonClicked()
+      self.delegate?.buttonClicked()
     }
   }
 
@@ -41,7 +37,7 @@ final class NavigationBarComponent {
 
 private extension NavigationBarComponent {
   func onActionButtonClicked() {
-    delegate.buttonClicked()
+    delegate?.buttonClicked()
   }
 
   func generateViewModel() -> NavigationBarViewViewModel {

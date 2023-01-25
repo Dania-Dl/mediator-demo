@@ -28,22 +28,20 @@ class HomeScreenComponentsFactory {
     self.containerViewController = containerViewController
   }
 
-  func timerComponent(delegate: TimerComponentDelegate) -> TimerComponent  {
-    return TimerComponent(dataProvider: diContainer.timerDataProvider, delegate: delegate)
+  func timerComponent() -> TimerComponent  {
+    return TimerComponent(dataProvider: diContainer.timerDataProvider)
   }
 
-  func navigationBarComponent(delegate: NavigationBarComponentDelegate) -> NavigationBarComponent {
+  func navigationBarComponent() -> NavigationBarComponent {
     return NavigationBarComponent(
-      delegate: delegate,
       dataProvider: diContainer.navigationDataProvider
     )
   }
 
-  func bannerComponent(view: BannerView, delegate: BannerComponentDelegate) -> BannerComponent {
+  func bannerComponent(view: BannerView) -> BannerComponent {
     return BannerComponent(
       view: view,
-      dataProvider: diContainer.bannerDataProvider,
-      delegate: delegate
+      dataProvider: diContainer.bannerDataProvider
     )
   }
 }

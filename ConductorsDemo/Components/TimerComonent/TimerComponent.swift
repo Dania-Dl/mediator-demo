@@ -19,14 +19,13 @@ protocol TimerComponentDelegate: AnyObject {
 
 final class TimerComponent {
 
-  private unowned var delegate: TimerComponentDelegate
+  weak var delegate: TimerComponentDelegate?
   private let dataProvider: TimerDataProvider
 
   private var timer: Timer?
 
-  init(dataProvider: TimerDataProvider, delegate: TimerComponentDelegate) {
+  init(dataProvider: TimerDataProvider) {
     self.dataProvider = dataProvider
-    self.delegate = delegate
   }
 
   private func initializeTimer() -> Timer {
@@ -34,7 +33,7 @@ final class TimerComponent {
       withTimeInterval: 1,
       repeats: true,
       block: { [weak self] _ in
-        self?.delegate.didTick()
+        self?.delegate?.didTick()
     })
   }
 
@@ -44,7 +43,7 @@ final class TimerComponent {
     } else {
       timer?.invalidate()
       timer = nil
-      delegate.didStop()
+      delegate?.didStop()
     }
   }
 }

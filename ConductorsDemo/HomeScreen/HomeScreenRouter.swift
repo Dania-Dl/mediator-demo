@@ -20,10 +20,20 @@ class HomeScreenRouter: HomeScreenRouting {
   private lazy var homeScreenViewController: HomeScreenViewController = {
     let view = HomeScreenViewController(nibName: "HomeScreenViewController", bundle: nil)
     let diContainer = DIContainer()
-    let presenter: HomeScreenPresenter = HomeScreenPresenter(
-        view: view,
-        diContainer: diContainer
-      )
+    let componentsFactory = HomeScreenComponentsFactory(
+      diContainer: diContainer,
+      containerViewController: view
+    )
+    let conductor = HomeScreenConductor(
+      componentsFactory: componentsFactory,
+      diContainer: diContainer,
+      containerViewController: view
+    )
+    let presenter = HomeScreenPresenter(
+      view: view,
+      diContainer: diContainer,
+      conductor: conductor
+    )
     presenter.router = self
     view.presenter = presenter
     return view

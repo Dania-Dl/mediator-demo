@@ -32,19 +32,10 @@ final class HomeScreenPresenter {
     return conductor.homeScreenChannel
   }
 
-  init(view: HomeScreenView, diContainer: HomeScreenDIContainer) {
+  init(view: HomeScreenView, diContainer: HomeScreenDIContainer, conductor: HomeScreenConductor) {
 
     self.view = view
-
-    let componentsFactory = HomeScreenComponentsFactory(
-      diContainer: diContainer,
-      containerViewController: view
-    )
-    self.conductor = HomeScreenConductor(
-      componentsFactory: componentsFactory,
-      diContainer: diContainer,
-      containerViewController: view
-    )
+    self.conductor = conductor
     self.dataProvider = diContainer.homeScreenDataProvider
   }
 

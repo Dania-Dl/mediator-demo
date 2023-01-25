@@ -11,7 +11,7 @@ import UIKit
 
 typealias HomeScreenView = HomeView & UIViewController
 
-protocol HomeView: class {
+protocol HomeView: AnyObject {
   func setup(with navigationBar: NavigationBarView)
   func showLoading()
   func hideLoading()

@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-protocol HomeScreenRouting: class {
+protocol HomeScreenRouting: AnyObject {
   func start(with window: UIWindow)
 }
 

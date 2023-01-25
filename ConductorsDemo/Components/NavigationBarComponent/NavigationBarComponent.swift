@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol NavigationBarComponentDelegate: class {
+protocol NavigationBarComponentDelegate: AnyObject {
   func buttonClicked()
 }
 

@@ -12,7 +12,7 @@ protocol TimerDataProvider {
   var isRunning: Bool { get }
 }
 
-protocol TimerComponentDelegate: class {
+protocol TimerComponentDelegate: AnyObject {
   func didTick()
   func didStop()
 }

@@ -24,11 +24,7 @@ class HomeScreenRouter: HomeScreenRouting {
       diContainer: diContainer,
       containerViewController: view
     )
-    let conductor = HomeScreenConductor(
-      componentsFactory: componentsFactory,
-      diContainer: diContainer,
-      containerViewController: view
-    )
+    let conductor = HomeScreenConductor(componentsFactory: componentsFactory)
     let presenter = HomeScreenPresenter(
       view: view,
       diContainer: diContainer,

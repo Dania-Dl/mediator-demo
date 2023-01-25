@@ -21,18 +21,10 @@ class HomeScreenConductor {
   private var bannerComponent: BannerComponent?
 
   private let componentsFactory: HomeScreenComponentsFactory
-  private let diContainer: HomeScreenDIContainer
-  private let containerViewController: HomeScreenView
 
 
-  init(
-    componentsFactory: HomeScreenComponentsFactory,
-    diContainer: HomeScreenDIContainer,
-    containerViewController: HomeScreenView
-  ) {
+  init(componentsFactory: HomeScreenComponentsFactory) {
     self.componentsFactory = componentsFactory
-    self.diContainer = diContainer
-    self.containerViewController = containerViewController
   }
 
   func start(presenter: HomeScreenPresenter, bannerView: BannerView) {

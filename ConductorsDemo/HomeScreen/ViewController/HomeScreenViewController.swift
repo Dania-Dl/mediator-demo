@@ -12,12 +12,7 @@ final class HomeScreenViewController: UIViewController {
 
   @IBOutlet private weak var bannerView: BannerView!
 
-  private(set) lazy var presenter: HomeScreenPresenter = {
-    return HomeScreenPresenter(
-      view: self,
-      diContainer: DIContainer()
-    )
-  }()
+  var presenter: HomeScreenPresenter!
 
   override func viewDidLoad() {
     super.viewDidLoad()

@@ -18,9 +18,15 @@ class HomeScreenRouter: HomeScreenRouting {
   private var homeScreenNavigationController: UINavigationController?
 
   private lazy var homeScreenViewController: HomeScreenViewController = {
-    let homeScreenVC = HomeScreenViewController(nibName: "HomeScreenViewController", bundle: nil)
-    homeScreenVC.presenter.router = self
-    return homeScreenVC
+    let view = HomeScreenViewController(nibName: "HomeScreenViewController", bundle: nil)
+    let diContainer = DIContainer()
+    let presenter: HomeScreenPresenter = HomeScreenPresenter(
+        view: view,
+        diContainer: diContainer
+      )
+    presenter.router = self
+    view.presenter = presenter
+    return view
   }()
 
   func start(with window: UIWindow) {

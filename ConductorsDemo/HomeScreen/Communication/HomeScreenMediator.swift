@@ -1,5 +1,5 @@
 //
-//  HomeScreenConductor.swift
+//  HomeScreenMediator.swift
 //  ConductorsDemo
 //
 //  Created by Peter Mosaad on 12.11.19.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-class HomeScreenConductor {
+class HomeScreenMediator {
 
   private var timerComponent: TimerComponentObserver?
   private var navigationBarComponent: NavigationBarComponentObserver?
@@ -44,7 +44,7 @@ class HomeScreenConductor {
     navigationBarComponent?.update()
   }
 
-  func onViewWillAppear() {
+  func onHomeViewWillAppear() {
     navigationBarComponent?.update()
     bannerComponent?.updateView()
   }

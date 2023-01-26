@@ -34,7 +34,7 @@ final class HomeScreenPresenter {
   private var navigationBarComponent: NavigationBarComponent?
   private var bannerComponent: BannerComponent?
 
-  private var conductor: HomeScreenConductor?
+  private var mediator: HomeScreenMediator?
   private weak var delegate: HomeScreenDelegate?
 
   init(view: HomeScreenView, diContainer: HomeScreenDIContainer, componentsFactory: HomeScreenComponentsFactory) {
@@ -56,7 +56,7 @@ final class HomeScreenPresenter {
     if let navigationBarView = navigationBarComponent?.view {
       view.setup(with: navigationBarView)
     }
-    conductor = HomeScreenConductor(
+    mediator = HomeScreenMediator(
       timerComponent: timerComponent,
       navigationBarComponent: navigationBarComponent,
       bannerComponent: bannerComponent
@@ -64,47 +64,47 @@ final class HomeScreenPresenter {
   }
 
   func onViewWillAppear() {
-    conductor?.onViewWillAppear()
-  }
-}
-
-extension HomeScreenPresenter {
-  func stopCounting() {
-    dataProvider.isRunning = false
-  }
-
-  func increaseCounter() {
-    dataProvider.counter += 1
-  } 
-
-  func resetCounter() {
-    dataProvider.isRunning = !dataProvider.isRunning
-    dataProvider.counter = 0
+    mediator?.onHomeViewWillAppear()
   }
 }
 
 extension HomeScreenPresenter: TimerComponentDelegate {
   func didTick() {
     increaseCounter()
-    conductor?.onTimerTick()
+    mediator?.onTimerTick()
   }
   
   func didStop() {
     stopCounting()
-    conductor?.onTimerStop()
+    mediator?.onTimerStop()
   }
 }
 
 extension HomeScreenPresenter: NavigationBarComponentDelegate {
   func buttonClicked() {
     resetCounter()
-    conductor?.onNaviagationBarButtonClicked()
+    mediator?.onNaviagationBarButtonClicked()
   }
 }
 
 extension HomeScreenPresenter: BannerComponentDelegate {
   func bannerButtonClicked() {
     resetCounter()
-    conductor?.onBannerButtonClicked()
+    mediator?.onBannerButtonClicked()
+  }
+}
+
+private extension HomeScreenPresenter {
+  func stopCounting() {
+    dataProvider.isRunning = false
+  }
+
+  func increaseCounter() {
+    dataProvider.counter += 1
+  }
+
+  func resetCounter() {
+    dataProvider.isRunning = !dataProvider.isRunning
+    dataProvider.counter = 0
   }
 }

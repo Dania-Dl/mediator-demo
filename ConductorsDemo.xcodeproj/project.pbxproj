@@ -15,7 +15,7 @@
 		E2F0CA66237AAFDB009BB22A /* HomeScreenComponentsFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F0CA4C237AAFDB009BB22A /* HomeScreenComponentsFactory.swift */; };
 		E2F0CA67237AAFDB009BB22A /* HomeScreenPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F0CA4E237AAFDB009BB22A /* HomeScreenPresenter.swift */; };
 		E2F0CA68237AAFDB009BB22A /* HomeScreenRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F0CA4F237AAFDB009BB22A /* HomeScreenRouter.swift */; };
-		E2F0CA74237AAFDB009BB22A /* HomeScreenConductor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F0CA5D237AAFDB009BB22A /* HomeScreenConductor.swift */; };
+		E2F0CA74237AAFDB009BB22A /* HomeScreenMediator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F0CA5D237AAFDB009BB22A /* HomeScreenMediator.swift */; };
 		E2F0CA76237AAFDB009BB22A /* HomeScreenViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E2F0CA60237AAFDB009BB22A /* HomeScreenViewController.xib */; };
 		E2F0CA77237AAFDB009BB22A /* HomeScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F0CA61237AAFDB009BB22A /* HomeScreenViewController.swift */; };
 		E2F0CA7B237ABF35009BB22A /* TimerComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F0CA7A237ABF35009BB22A /* TimerComponent.swift */; };
@@ -49,7 +49,7 @@
 		E2F0CA4C237AAFDB009BB22A /* HomeScreenComponentsFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeScreenComponentsFactory.swift; sourceTree = "<group>"; };
 		E2F0CA4E237AAFDB009BB22A /* HomeScreenPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeScreenPresenter.swift; sourceTree = "<group>"; };
 		E2F0CA4F237AAFDB009BB22A /* HomeScreenRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeScreenRouter.swift; sourceTree = "<group>"; };
-		E2F0CA5D237AAFDB009BB22A /* HomeScreenConductor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeScreenConductor.swift; sourceTree = "<group>"; };
+		E2F0CA5D237AAFDB009BB22A /* HomeScreenMediator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeScreenMediator.swift; sourceTree = "<group>"; };
 		E2F0CA60237AAFDB009BB22A /* HomeScreenViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeScreenViewController.xib; sourceTree = "<group>"; };
 		E2F0CA61237AAFDB009BB22A /* HomeScreenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeScreenViewController.swift; sourceTree = "<group>"; };
 		E2F0CA7A237ABF35009BB22A /* TimerComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerComponent.swift; sourceTree = "<group>"; };
@@ -142,7 +142,7 @@
 			isa = PBXGroup;
 			children = (
 				E2F0CA4C237AAFDB009BB22A /* HomeScreenComponentsFactory.swift */,
-				E2F0CA5D237AAFDB009BB22A /* HomeScreenConductor.swift */,
+				E2F0CA5D237AAFDB009BB22A /* HomeScreenMediator.swift */,
 			);
 			path = Communication;
 			sourceTree = "<group>";
@@ -300,7 +300,7 @@
 				E2F0CA7B237ABF35009BB22A /* TimerComponent.swift in Sources */,
 				E2F0CA8C237AE8EE009BB22A /* BannerView.swift in Sources */,
 				E2F0CA68237AAFDB009BB22A /* HomeScreenRouter.swift in Sources */,
-				E2F0CA74237AAFDB009BB22A /* HomeScreenConductor.swift in Sources */,
+				E2F0CA74237AAFDB009BB22A /* HomeScreenMediator.swift in Sources */,
 				E2F0CA66237AAFDB009BB22A /* HomeScreenComponentsFactory.swift in Sources */,
 				E2F0CA67237AAFDB009BB22A /* HomeScreenPresenter.swift in Sources */,
 				E2F0CA77237AAFDB009BB22A /* HomeScreenViewController.swift in Sources */,

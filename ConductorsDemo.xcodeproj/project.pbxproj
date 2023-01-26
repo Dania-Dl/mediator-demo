@@ -12,7 +12,6 @@
 		E2F0CA2C237AAEC3009BB22A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E2F0CA2B237AAEC3009BB22A /* Assets.xcassets */; };
 		E2F0CA2F237AAEC3009BB22A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2F0CA2D237AAEC3009BB22A /* LaunchScreen.storyboard */; };
 		E2F0CA3A237AAEC3009BB22A /* ConductorsDemoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F0CA39237AAEC3009BB22A /* ConductorsDemoUITests.swift */; };
-		E2F0CA46237AAF0F009BB22A /* Channel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F0CA45237AAF0F009BB22A /* Channel.swift */; };
 		E2F0CA66237AAFDB009BB22A /* HomeScreenComponentsFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F0CA4C237AAFDB009BB22A /* HomeScreenComponentsFactory.swift */; };
 		E2F0CA67237AAFDB009BB22A /* HomeScreenPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F0CA4E237AAFDB009BB22A /* HomeScreenPresenter.swift */; };
 		E2F0CA68237AAFDB009BB22A /* HomeScreenRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F0CA4F237AAFDB009BB22A /* HomeScreenRouter.swift */; };
@@ -47,7 +46,6 @@
 		E2F0CA35237AAEC3009BB22A /* ConductorsDemoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ConductorsDemoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2F0CA39237AAEC3009BB22A /* ConductorsDemoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConductorsDemoUITests.swift; sourceTree = "<group>"; };
 		E2F0CA3B237AAEC3009BB22A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E2F0CA45237AAF0F009BB22A /* Channel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Channel.swift; sourceTree = "<group>"; };
 		E2F0CA4C237AAFDB009BB22A /* HomeScreenComponentsFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeScreenComponentsFactory.swift; sourceTree = "<group>"; };
 		E2F0CA4E237AAFDB009BB22A /* HomeScreenPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeScreenPresenter.swift; sourceTree = "<group>"; };
 		E2F0CA4F237AAFDB009BB22A /* HomeScreenRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeScreenRouter.swift; sourceTree = "<group>"; };
@@ -102,7 +100,6 @@
 			isa = PBXGroup;
 			children = (
 				E2F0CA24237AAEC0009BB22A /* AppDelegate.swift */,
-				E2F0CA44237AAF0F009BB22A /* CommunicationChannel */,
 				E2F0CA79237ABF1F009BB22A /* Components */,
 				E2F0CA47237AAFDB009BB22A /* HomeScreen */,
 				E2F0CA2B237AAEC3009BB22A /* Assets.xcassets */,
@@ -119,14 +116,6 @@
 				E2F0CA3B237AAEC3009BB22A /* Info.plist */,
 			);
 			path = ConductorsDemoUITests;
-			sourceTree = "<group>";
-		};
-		E2F0CA44237AAF0F009BB22A /* CommunicationChannel */ = {
-			isa = PBXGroup;
-			children = (
-				E2F0CA45237AAF0F009BB22A /* Channel.swift */,
-			);
-			path = CommunicationChannel;
 			sourceTree = "<group>";
 		};
 		E2F0CA47237AAFDB009BB22A /* HomeScreen */ = {
@@ -306,7 +295,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E2F0CA46237AAF0F009BB22A /* Channel.swift in Sources */,
 				E2F0CA82237AE43E009BB22A /* BannerComponent.swift in Sources */,
 				E2EF106024741A8000AB1171 /* DIContainer.swift in Sources */,
 				E2F0CA7B237ABF35009BB22A /* TimerComponent.swift in Sources */,

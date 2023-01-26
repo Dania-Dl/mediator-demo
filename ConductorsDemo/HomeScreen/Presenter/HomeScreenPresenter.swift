@@ -13,15 +13,10 @@ typealias HomeScreenView = HomeView & UIViewController
 
 protocol HomeView: AnyObject {
   func setup(with navigationBar: NavigationBarView)
-  func showLoading()
-  func hideLoading()
 }
 
 protocol HomeScreenDelegate: AnyObject {
-  func onViewDidLoad()
   func onViewWillAppear()
-  func onViewDidAppear()
-  func onViewWillDisappear()
 }
 
 protocol HomeScreenDataProvider {
@@ -51,10 +46,8 @@ final class HomeScreenPresenter {
 
   func onViewDidLoad(with bannerView: BannerView) {
     createComponents(bannerView: bannerView)
-    delegate?.onViewDidLoad()
   }
 
-  
   func createComponents(bannerView: BannerView) {
     timerComponent = componentsFactory.timerComponent()
     navigationBarComponent = componentsFactory.navigationBarComponent()
@@ -73,36 +66,18 @@ final class HomeScreenPresenter {
   func onViewWillAppear() {
     delegate?.onViewWillAppear()
   }
-
-  func notifyOnViewDidAppear() {
-    delegate?.onViewDidAppear()
-  }
-
-  func notifyOnViewWillDisappear() {
-    delegate?.onViewWillDisappear()
-  }
-
-  func setup(with navigationBar: NavigationBarView) {
-    view.setup(with: navigationBar)
-  }
-
 }
 
 extension HomeScreenPresenter {
-  func timerDidStop() {
+  func stopCounting() {
     dataProvider.isRunning = false
   }
 
-  func timerDidTick() {
+  func increaseCounter() {
     dataProvider.counter += 1
   } 
 
-  func bannerButtonClicked() {
-    dataProvider.isRunning = !dataProvider.isRunning
-    dataProvider.counter = 0
-  }
-
-  func navigationButtonClicked() {
+  func resetCounter() {
     dataProvider.isRunning = !dataProvider.isRunning
     dataProvider.counter = 0
   }

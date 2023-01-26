@@ -25,16 +25,6 @@ final class HomeScreenViewController: UIViewController {
     presenter.onViewWillAppear()
   }
 
-  override func viewDidAppear(_ animated: Bool) {
-    super.viewDidAppear(animated)
-    presenter.notifyOnViewDidAppear()
-  }
-
-  override func viewWillDisappear(_ animated: Bool) {
-    super.viewWillDisappear(animated)
-    presenter.notifyOnViewWillDisappear()
-  }
-
   private func setupAppearance() {
     navigationController?.navigationBar.barStyle = .default
   }
@@ -46,13 +36,5 @@ extension HomeScreenViewController: HomeView {
     navigationItem.titleView = navigationBar
     navigationBar.isUserInteractionEnabled = true
     navigationBar.layer.masksToBounds = false
-  }
-
-  func showLoading() {
-    // Do it.
-  }
-
-  func hideLoading() {
-    // Do it.
   }
 }

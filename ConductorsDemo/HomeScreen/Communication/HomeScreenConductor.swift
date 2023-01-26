@@ -33,13 +33,13 @@ class HomeScreenConductor {
 
 extension HomeScreenConductor: TimerComponentDelegate {
   func didTick() {
-    presenter.timerDidTick()
+    presenter.increaseCounter()
     navigationBarComponent?.update()
     bannerComponent?.updateView()
   }
   
   func didStop() {
-    presenter.timerDidStop()
+    presenter.stopCounting()
     navigationBarComponent?.update()
     bannerComponent?.updateView()
   }
@@ -47,7 +47,7 @@ extension HomeScreenConductor: TimerComponentDelegate {
 
 extension HomeScreenConductor: NavigationBarComponentDelegate {
   func buttonClicked() {
-    presenter.navigationButtonClicked()
+    presenter.resetCounter()
     timerComponent?.resetTimerState()
     bannerComponent?.updateView()
   }
@@ -55,18 +55,15 @@ extension HomeScreenConductor: NavigationBarComponentDelegate {
 
 extension HomeScreenConductor: BannerComponentDelegate {
   func bannerButtonClicked() {
-    presenter.bannerButtonClicked()
+    presenter.resetCounter()
     timerComponent?.resetTimerState()
     navigationBarComponent?.update()
   }
 }
 
 extension HomeScreenConductor: HomeScreenDelegate {
-  func onViewDidLoad() {}
   func onViewWillAppear() {
     navigationBarComponent?.update()
     bannerComponent?.updateView()
   }
-  func onViewDidAppear() {}
-  func onViewWillDisappear() {}
 }

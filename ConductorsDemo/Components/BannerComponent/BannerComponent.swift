@@ -18,6 +18,10 @@ protocol BannerDataProvider {
   var isRunning: Bool { get }
 }
 
+protocol BannerComponentObserver {
+  func updateView()
+}
+
 final class BannerComponent {
 
   private let view: BannerView
@@ -36,10 +40,6 @@ final class BannerComponent {
       self.onActionButtonClicked()
     }
   }
-
-  public func updateView() {
-    view.update(with: generateViewModel())
-  }
 }
 
 private extension BannerComponent {
@@ -56,4 +56,10 @@ private extension BannerComponent {
       title: title
     )
   }
+}
+
+extension BannerComponent: BannerComponentObserver {
+  func updateView() {
+   view.update(with: generateViewModel())
+ }
 }

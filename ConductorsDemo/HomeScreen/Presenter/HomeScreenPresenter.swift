@@ -50,13 +50,13 @@ final class HomeScreenPresenter {
 
   func createComponents(bannerView: BannerView) {
     timerComponent = componentsFactory.timerComponent()
+    timerComponent?.delegate = self
     navigationBarComponent = componentsFactory.navigationBarComponent()
     bannerComponent = componentsFactory.bannerComponent(view: bannerView)
     if let navigationBarView = navigationBarComponent?.view {
       view.setup(with: navigationBarView)
     }
     conductor = HomeScreenConductor(
-      presenter: self,
       timerComponent: timerComponent,
       navigationBarComponent: navigationBarComponent,
       bannerComponent: bannerComponent
@@ -64,7 +64,7 @@ final class HomeScreenPresenter {
   }
 
   func onViewWillAppear() {
-    delegate?.onViewWillAppear()
+    conductor?.onViewWillAppear()
   }
 }
 
@@ -80,5 +80,31 @@ extension HomeScreenPresenter {
   func resetCounter() {
     dataProvider.isRunning = !dataProvider.isRunning
     dataProvider.counter = 0
+  }
+}
+
+extension HomeScreenPresenter: TimerComponentDelegate {
+  func didTick() {
+    increaseCounter()
+    conductor?.onTimerTick()
+  }
+  
+  func didStop() {
+    stopCounting()
+    conductor?.onTimerStop()
+  }
+}
+
+extension HomeScreenPresenter: NavigationBarComponentDelegate {
+  func buttonClicked() {
+    resetCounter()
+    conductor?.onNaviagationBarButtonClicked()
+  }
+}
+
+extension HomeScreenPresenter: BannerComponentDelegate {
+  func bannerButtonClicked() {
+    resetCounter()
+    conductor?.onBannerButtonClicked()
   }
 }

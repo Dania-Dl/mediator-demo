@@ -17,6 +17,10 @@ protocol NavigationBarComponentDataProvider {
   var isRunning: Bool { get }
 }
 
+protocol NavigationBarComponentObserver {
+  func update()
+}
+
 final class NavigationBarComponent {
 
   let view = NavigationBarView.initFromNib()!
@@ -29,10 +33,6 @@ final class NavigationBarComponent {
       self.delegate?.buttonClicked()
     }
   }
-
-  func update() {
-    view.update(with: generateViewModel())
-  }
 }
 
 private extension NavigationBarComponent {
@@ -44,5 +44,11 @@ private extension NavigationBarComponent {
     let title = dataProvider.isRunning ? "Stop" : "Start"
     let counter = dataProvider.isRunning ? "\(dataProvider.count)" : "Not Running"
     return NavigationBarViewViewModel(counter: counter, buttonTitle: title)
+  }
+}
+
+extension NavigationBarComponent: NavigationBarComponentObserver {
+  func update() {
+    view.update(with: generateViewModel())
   }
 }

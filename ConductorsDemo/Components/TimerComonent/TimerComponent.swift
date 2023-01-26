@@ -17,6 +17,10 @@ protocol TimerComponentDelegate: AnyObject {
   func didStop()
 }
 
+protocol TimerComponentObserver: AnyObject {
+  func resetTimerState()
+}
+
 final class TimerComponent {
 
   weak var delegate: TimerComponentDelegate?
@@ -36,8 +40,10 @@ final class TimerComponent {
         self?.delegate?.didTick()
     })
   }
+}
 
-  public func resetTimerState() {
+extension TimerComponent: TimerComponentObserver {
+  func resetTimerState() {
     if timer == nil {
       timer = initializeTimer()
     } else {
